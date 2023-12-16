@@ -13,7 +13,16 @@ ss
 
 0 directories, 87 files
 
-$ imgdups -dir ss/ -quiet
+$ imgdups -h
+Usage of imgdups:
+  -dir string
+        Images folder path
+  -quiet
+        If true, won't print the removed duplicates (default false)
+  -workers int
+        Number of workers to run concurrently (default 100)
+
+$ imgdups -dir ss/ -workers 50 -quiet
 $ tree ss
 ss
 ├── dups
