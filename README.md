@@ -2,6 +2,19 @@
 
 imgdups groups images from a given folder based on their [perceptual hash](https://en.wikipedia.org/wiki/Perceptual_hashing). 
 
+## Usage
+```bash
+$ imgdups -h
+Usage of imgdups:
+  -dir string
+        Images folder path
+  -quiet
+        If true, wont print the removed duplicates (default false)
+  -workers int
+        Number of workers to run concurrently (default 100)
+```
+
+For a given folder structure containing images, such as:
 ```bash
 $ tree ss
 ss
@@ -12,16 +25,11 @@ ss
 [...]
 
 0 directories, 87 files
+```
 
-$ imgdups -h
-Usage of imgdups:
-  -dir string
-        Images folder path
-  -quiet
-        If true, won't print the removed duplicates (default false)
-  -workers int
-        Number of workers to run concurrently (default 100)
+After running `imgdups` the images will be grouped by its perceptual hash into subfolders, leaving the first image associated with each hash in the root folder for easy review.
 
+```bash
 $ imgdups -dir ss/ -workers 50 -quiet
 $ tree ss
 ss
