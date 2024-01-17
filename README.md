@@ -2,9 +2,15 @@
 
 imgdups groups images from a given folder based on their [perceptual hash](https://en.wikipedia.org/wiki/Perceptual_hashing). 
 
-## Usage
+## Install & Usage
+Once Go is installed and configured, run:
+
 ```bash
-$ imgdups -h
+❯❯❯ go install github.com/zkvL/imgdups@latest
+```
+
+```bash
+❯❯❯ imgdups -h
 Usage of imgdups:
   -dir string
         Images folder path
@@ -16,7 +22,7 @@ Usage of imgdups:
 
 For a given folder structure containing images, such as:
 ```bash
-$ tree ss
+❯❯❯ tree ss
 ss
 ├── img1.png
 ├── img2.png
@@ -30,8 +36,8 @@ ss
 After running `imgdups` the images will be grouped by its perceptual hash into subfolders, leaving the first image associated with each hash in the root folder for easy review.
 
 ```bash
-$ imgdups -dir ss/ -workers 50 -quiet
-$ tree ss
+❯❯❯ imgdups -dir ss/ -workers 50 -quiet
+❯❯❯ tree ss
 ss
 ├── dups
 │   ├── 0000000000000000
