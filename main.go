@@ -78,25 +78,25 @@ func mvDups(dirPath string, maxWorkers int, quiet bool) error {
 
 	close(hashCh)
 
-	// Process each group of duplicate images
-	dupsDir := filepath.Join(dirPath, "dups")
+	// Process each group of hashed images
+	dupsDir := filepath.Join(dirPath, "hashed")
 	if err := os.Mkdir(dupsDir, os.ModePerm); err != nil && !os.IsExist(err) {
 		return err
 	}
 
 	for hash, paths := range imgHashes {
-		if len(paths) > 1 {
+		if len(paths) > 0 {
 			sort.Strings(paths)
 			// Use the hash of the first file as the folder name
 			hashDir := filepath.Join(dupsDir, hash[2:])
 			if err := os.Mkdir(hashDir, os.ModePerm); err != nil && !os.IsExist(err) {
 				return err
 			}
-			// Move duplicates to the hash-named folder, leave one in the root folder
-			for _, p := range paths[1:] {
+			// Move similar to the hash-named folder
+			for _, p := range paths {
 				newPath := filepath.Join(hashDir, filepath.Base(p))
 				if !quiet {
-					fmt.Printf("[-] Moving duplicate: %s to %s\n", p, newPath)
+					fmt.Printf("[-] Moving: %s to %s\n", p, newPath)
 				}
 				if err := os.Rename(p, newPath); err != nil {
 					return err
@@ -125,7 +125,7 @@ func getImgPaths(dirPath string) ([]string, error) {
 
 func main() {
 	dir := flag.String("dir", "", "Images folder path")
-	quiet := flag.Bool("quiet", false, "If true, won't print the removed duplicates (default false)")
+	quiet := flag.Bool("quiet", false, "If true, won't print the moved files (default false)")
 	maxWorkers := flag.Int("workers", 100, "Number of workers to run concurrently")
 	flag.Parse()
 
