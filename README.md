@@ -37,7 +37,7 @@ After running `imgdups` the images will be grouped by its perceptual hash into s
 ❯❯❯ imgdups -dir ss/ -workers 50 -quiet
 ❯❯❯ tree ss
 ss
-├── dups
+├── hashed
 │   ├── 0000000000000000
 │   │   ├── img5.png
 │   │   ├── img7.png
