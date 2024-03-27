@@ -29,8 +29,6 @@ ss
 ├── img3.png
 ├── img4.png
 [...]
-
-0 directories, 87 files
 ```
 
 After running `imgdups` the images will be grouped by its perceptual hash into subfolders for easy review. 
